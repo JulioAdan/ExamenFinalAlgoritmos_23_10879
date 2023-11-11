@@ -1,0 +1,48 @@
+import openpyxl
+libro = openpyxl.load_workbook('vehiculos.xlsx')
+
+hoja = libro['listado']
+
+#encabesado 
+hoja ['A1'].value = 'codigo'
+hoja ['B1'].value = 'marca'
+hoja ['C1'].value = 'modelo'
+hoja ['D1'].value = 'precio'
+hoja ['E1'].value = 'kilometrage'
+
+datos_veiculos = [
+    {
+     'codigo': 'vthilux',
+     'marca': 'toyota',
+     'modelo': 'dosmil veintitres',
+     'precio': 320000,
+     'kilometraje': 54520,  
+    },
+    {
+     'codigo': 'vhhtres',
+     'marca': 'hommer',
+     'modelo': 'dosmil trece',
+     'precio': 150000,
+     'kilometraje': 134800,
+    },
+    {
+     'codigo': 'vmseis',
+     'marca': 'mazda',
+     'modelo': 'dosmil diez',
+     'precio': 25000,
+     'kilometraje': 208320,   
+    }
+]
+proxima_fila = hoja.max_row + 1
+
+for venta in datos_veiculos:
+    hoja [f'A{proxima_fila}'].value = venta ['codigo']
+    hoja [f'B{proxima_fila}'].value = venta ['marca']
+    hoja [f'C{proxima_fila}'].value = venta ['modelo']
+    hoja [f'D{proxima_fila}'].value = venta ['precio']
+    hoja [f'E{proxima_fila}'].value = venta ['kilometraje']
+    proxima_fila +=1
+
+    # se agrega  al archivo
+    libro.save('veiculos.xlsx')
+
